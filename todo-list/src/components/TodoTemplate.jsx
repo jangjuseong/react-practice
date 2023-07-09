@@ -1,9 +1,4 @@
-import React, { ReactNode } from 'react';
 import styled from 'styled-components';
-
-interface TodoTemplateProps {
-  children: ReactNode;
-}
 
 const TodoTemplateBlock = styled.div`
   width: 512px;
@@ -22,7 +17,7 @@ const TodoTemplateBlock = styled.div`
   flex-direction: column;
 `;
 
-const TodoTemplate: React.FC<TodoTemplateProps> = ({ children }) => {
+const TodoTemplate = ({ children }) => {
   return <TodoTemplateBlock>{children}</TodoTemplateBlock>;
 };
 
