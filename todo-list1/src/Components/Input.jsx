@@ -10,6 +10,7 @@ export default function Input() {
 
   const submitHandler = () => {
     setList((prevList) => [...prevList, { value: todo, isEditing: false }]);
+    console.log(list);
     setTodo('');
   };
 
@@ -19,9 +20,9 @@ export default function Input() {
     setList(newList);
   };
 
-  const updateHandler = (index, value) => {
+  const updateHandler = (index, newValue) => {
     const newList = [...list];
-    newList[index] = { ...newList[index], value };
+    newList[index] = { ...newList[index], value: newValue };
     setList(newList);
   };
 
@@ -77,7 +78,6 @@ export default function Input() {
                 </button>
               </>
             )}
-
             <button
               onClick={() => deleteHandler(index)}
               className='ml-2 border'
