@@ -9,13 +9,31 @@ export default function Input() {
   };
 
   const submitHandler = () => {
-    setList([...list, todo]);
+    setList((prevList) => [...prevList, { value: todo, isEditing: false }]);
     setTodo('');
   };
 
   const deleteHandler = (index) => {
     const newList = [...list];
     newList.splice(index, 1);
+    setList(newList);
+  };
+
+  const updateHandler = (index, value) => {
+    const newList = [...list];
+    newList[index] = { ...newList[index], value };
+    setList(newList);
+  };
+
+  const editHandler = (index) => {
+    const newList = [...list];
+    newList[index] = { ...newList[index], isEditing: true };
+    setList(newList);
+  };
+
+  const finishedHandler = (index) => {
+    const newList = [...list];
+    newList[index] = { ...newList[index], isEditing: false };
     setList(newList);
   };
 
@@ -33,7 +51,33 @@ export default function Input() {
       <div className='flex flex-col'>
         {list.map((item, index) => (
           <div key={index}>
-            <span>{item}</span>
+            {item.isEditing ? (
+              <>
+                <input
+                  type='text'
+                  className='border'
+                  value={item.value}
+                  onChange={(e) => updateHandler(index, e.target.value)}
+                />
+                <button
+                  onClick={() => finishedHandler(index)}
+                  className='ml-2 border'
+                >
+                  수정 완료
+                </button>
+              </>
+            ) : (
+              <>
+                <span>{item.value}</span>
+                <button
+                  onClick={() => editHandler(index)}
+                  className='ml-2 border'
+                >
+                  수정
+                </button>
+              </>
+            )}
+
             <button
               onClick={() => deleteHandler(index)}
               className='ml-2 border'
