@@ -1,9 +1,9 @@
-import Input from './Components/Input';
+import TodoList from './Components/TodoList';
 
 function App() {
   return (
     <>
-      <Input></Input>
+      <TodoList></TodoList>
     </>
   );
 }
