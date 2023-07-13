@@ -1,16 +1,16 @@
 import { useState } from 'react';
 
 const UseHookListManagementHooks = () => {
-  const [todo, setTodo] = useState('');
+  const [inputValue, setInputValue] = useState('');
   const [list, setList] = useState([]);
 
   const inputHandler = e => {
-    setTodo(e.target.value);
+    setInputValue(e.target.value);
   };
 
   const submitHandler = () => {
-    setList(prevList => [...prevList, { value: todo, isEditing: false }]);
-    setTodo('');
+    setList(prevList => [...prevList, { value: inputValue, isEditing: false }]);
+    setInputValue('');
   };
 
   const deleteHandler = index => {
@@ -38,7 +38,7 @@ const UseHookListManagementHooks = () => {
   };
 
   return {
-    todo,
+    inputValue,
     list,
     inputHandler,
     submitHandler,
