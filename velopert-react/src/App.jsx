@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
-import CreateUser from './Components/13/CreateUser';
-import UserList from './Components/13/UserList';
+import CreateUser from './Components/14/CreateUser';
+import UserList from './Components/14/UserList';
 
 function App() {
   const [inputs, setInputs] = useState({
@@ -46,6 +46,10 @@ function App() {
     nextId.current += 1;
   };
 
+  const onRemove = id => {
+    setUsers(users.filter(user => user.id !== id));
+  };
+
   return (
     <>
       <CreateUser
@@ -54,7 +58,7 @@ function App() {
         onChange={onChange}
         onCreate={onCreate}
       />
-      <UserList users={users} />
+      <UserList users={users} onRemove={onRemove} />
     </>
   );
 }
