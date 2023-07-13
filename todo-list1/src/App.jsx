@@ -1,30 +1,36 @@
-import { useState } from 'react';
 import TodoItem from './Components/TodoItem';
 import TodoList from './Components/TodoList';
+import UseHookListManagementHooks from './Components/UseHookListManagementHooks';
 
 function App() {
-  const [todo, setTodo] = useState('');
-  const [list, setList] = useState([]);
-
-  const inputHandler = e => {
-    setTodo(e.target.value);
-  };
-
-  const submitHandler = () => {
-    setList(prevList => [...prevList, { value: todo, isEditing: false }]);
-    setTodo('');
-  };
+  const {
+    inputValue,
+    list,
+    setList,
+    inputHandler,
+    submitHandler,
+    deleteHandler,
+    updateHandler,
+    editHandler,
+    finishedHandler,
+  } = UseHookListManagementHooks();
 
   return (
     <>
       <TodoList
-        todo={todo}
+        inputValue={inputValue}
         inputHandler={inputHandler}
         list={list}
         submitHandler={submitHandler}
         setList={setList}
       />
-      <TodoItem list={list} setList={setList} />
+      <TodoItem
+        list={list}
+        deleteHandler={deleteHandler}
+        updateHandler={updateHandler}
+        editHandler={editHandler}
+        finishedHandler={finishedHandler}
+      />
     </>
   );
 }

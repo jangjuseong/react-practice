@@ -1,12 +1,12 @@
 import React from 'react';
 
-export default function TodoList({ todo, inputHandler, submitHandler }) {
+export default function TodoList({ inputValue, inputHandler, submitHandler }) {
   return (
     <div>
       <input
         onChange={inputHandler}
         type='text'
-        value={todo}
+        value={inputValue}
         className='border'
       />
       <button onClick={submitHandler} className='border ml-2'>

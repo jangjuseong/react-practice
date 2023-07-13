@@ -1,29 +1,12 @@
 import React from 'react';
 
-const TodoItem = ({ list, setList }) => {
-  const deleteHandler = index => {
-    const newList = [...list];
-    newList.splice(index, 1);
-    setList(newList);
-  };
-
-  const updateHandler = (index, newValue) => {
-    const newList = [...list];
-    newList[index] = { ...newList[index], value: newValue };
-    setList(newList);
-  };
-
-  const editHandler = index => {
-    const newList = [...list];
-    newList[index] = { ...newList[index], isEditing: true };
-    setList(newList);
-  };
-
-  const finishedHandler = index => {
-    const newList = [...list];
-    newList[index] = { ...newList[index], isEditing: false };
-    setList(newList);
-  };
+const TodoItem = ({
+  list,
+  deleteHandler,
+  updateHandler,
+  editHandler,
+  finishedHandler,
+}) => {
   return (
     <>
       {list.map((item, index) => (

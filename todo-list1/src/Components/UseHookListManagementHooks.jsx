@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export const UseHookListManagementHooks = () => {
+const UseHookListManagementHooks = () => {
   const [todo, setTodo] = useState('');
   const [list, setList] = useState([]);
 
@@ -40,6 +40,7 @@ export const UseHookListManagementHooks = () => {
   return {
     todo,
     list,
+    setList,
     inputHandler,
     submitHandler,
     deleteHandler,
@@ -48,3 +49,5 @@ export const UseHookListManagementHooks = () => {
     finishedHandler,
   };
 };
+
+export default UseHookListManagementHooks;
