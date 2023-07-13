@@ -1,4 +1,4 @@
-import InputSample from './Components/8/InputSample';
+import InputSample from './Components/9/InputSample';
 
 function App() {
   return (
