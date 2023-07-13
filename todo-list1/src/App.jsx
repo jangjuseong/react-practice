@@ -1,9 +1,40 @@
+import { useState } from 'react';
+import TodoItem from './Components/TodoItem';
 import TodoList from './Components/TodoList';
 
 function App() {
+  const [todo, setTodo] = useState('');
+  const [list, setList] = useState([]);
+
+  const inputHandler = e => {
+    setTodo(e.target.value);
+  };
+
+  const submitHandler = () => {
+    setList(prevList => [...prevList, { value: todo, isEditing: false }]);
+    setTodo('');
+  };
+
   return (
     <>
-      <TodoList></TodoList>
+      <TodoList
+        todo={todo}
+        inputHandler={inputHandler}
+        list={list}
+        submitHandler={submitHandler}
+        setList={setList}
+      />
+      <div>
+        {list.map((item, index) => (
+          <TodoItem
+            key={index}
+            item={item}
+            index={index}
+            list={list}
+            setList={setList}
+          />
+        ))}
+      </div>
     </>
   );
 }

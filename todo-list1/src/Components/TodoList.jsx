@@ -1,19 +1,6 @@
-import React, { useState } from 'react';
-import TodoItem from './TodoItem';
+import React from 'react';
 
-export default function TodoList() {
-  const [todo, setTodo] = useState('');
-  const [list, setList] = useState([]);
-
-  const inputHandler = (e) => {
-    setTodo(e.target.value);
-  };
-
-  const submitHandler = () => {
-    setList((prevList) => [...prevList, { value: todo, isEditing: false }]);
-    setTodo('');
-  };
-
+export default function TodoList({ todo, inputHandler, submitHandler }) {
   return (
     <div>
       <input
@@ -25,11 +12,6 @@ export default function TodoList() {
       <button onClick={submitHandler} className='border ml-2'>
         확인
       </button>
-      <div className='flex flex-col'>
-        {list.map((item, index) => (
-          <TodoItem item={item} index={index} list={list} setList={setList} />
-        ))}
-      </div>
     </div>
   );
 }
