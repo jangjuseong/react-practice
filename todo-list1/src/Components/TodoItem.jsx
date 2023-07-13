@@ -1,15 +1,15 @@
 import React from 'react';
 
 const TodoItem = ({
-  list,
-  deleteHandler,
-  updateHandler,
-  editHandler,
-  finishedHandler,
+  itemList,
+  handleDelete,
+  handleUpdate,
+  handleEdit,
+  handleFinish,
 }) => {
   return (
     <>
-      {list.map((item, index) => (
+      {itemList.map((item, index) => (
         <div className='flex flex-col' key={index}>
           <div>
             {item.isEditing ? (
@@ -18,10 +18,10 @@ const TodoItem = ({
                   type='text'
                   className='border'
                   value={item.value}
-                  onChange={e => updateHandler(index, e.target.value)}
+                  onChange={e => handleUpdate(index, e.target.value)}
                 />
                 <button
-                  onClick={() => finishedHandler(index)}
+                  onClick={() => handleFinish(index)}
                   className='ml-2 border'
                 >
                   수정 완료
@@ -31,17 +31,14 @@ const TodoItem = ({
               <>
                 <span>{item.value}</span>
                 <button
-                  onClick={() => editHandler(index)}
+                  onClick={() => handleEdit(index)}
                   className='ml-2 border'
                 >
                   수정
                 </button>
               </>
             )}
-            <button
-              onClick={() => deleteHandler(index)}
-              className='ml-2 border'
-            >
+            <button onClick={() => handleDelete(index)} className='ml-2 border'>
               Delete
             </button>
           </div>

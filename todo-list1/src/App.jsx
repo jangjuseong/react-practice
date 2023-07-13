@@ -1,33 +1,32 @@
 import TodoItem from './Components/TodoItem';
 import TodoList from './Components/TodoList';
-import UseHookListManagementHooks from './Components/UseHookListManagementHooks';
+import UseListManagementHooks from './Components/UseListManagementHooks';
 
 function App() {
   const {
     inputValue,
-    list,
-    inputHandler,
-    submitHandler,
-    deleteHandler,
-    updateHandler,
-    editHandler,
-    finishedHandler,
-  } = UseHookListManagementHooks();
+    itemList,
+    handleInputChange,
+    handleSubmit,
+    handleDelete,
+    handleUpdate,
+    handleEdit,
+    handleFinish,
+  } = UseListManagementHooks();
 
   return (
     <>
       <TodoList
         inputValue={inputValue}
-        inputHandler={inputHandler}
-        list={list}
-        submitHandler={submitHandler}
+        handleInputChange={handleInputChange}
+        handleSubmit={handleSubmit}
       />
       <TodoItem
-        list={list}
-        deleteHandler={deleteHandler}
-        updateHandler={updateHandler}
-        editHandler={editHandler}
-        finishedHandler={finishedHandler}
+        itemList={itemList}
+        handleDelete={handleDelete}
+        handleUpdate={handleUpdate}
+        handleEdit={handleEdit}
+        handleFinish={handleFinish}
       />
     </>
   );
