@@ -24,17 +24,7 @@ function App() {
         submitHandler={submitHandler}
         setList={setList}
       />
-      <div>
-        {list.map((item, index) => (
-          <TodoItem
-            key={index}
-            item={item}
-            index={index}
-            list={list}
-            setList={setList}
-          />
-        ))}
-      </div>
+      <TodoItem list={list} setList={setList} />
     </>
   );
 }
