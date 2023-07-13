@@ -6,7 +6,6 @@ function App() {
   const {
     inputValue,
     list,
-    setList,
     inputHandler,
     submitHandler,
     deleteHandler,
@@ -22,7 +21,6 @@ function App() {
         inputHandler={inputHandler}
         list={list}
         submitHandler={submitHandler}
-        setList={setList}
       />
       <TodoItem
         list={list}

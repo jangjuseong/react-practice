@@ -40,7 +40,6 @@ const UseHookListManagementHooks = () => {
   return {
     todo,
     list,
-    setList,
     inputHandler,
     submitHandler,
     deleteHandler,
