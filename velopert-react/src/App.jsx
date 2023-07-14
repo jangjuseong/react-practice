@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo, useRef, useState } from 'react';
-import CreateUser from './Components/18/CreateUser';
-import UserList from './Components/18/UserList';
+import CreateUser from './Components/19/CreateUser';
+import UserList from './Components/19/UserList';
 
 function countActiveUsers(users) {
   console.log('활성 사용자 수를 세는 중...');
@@ -14,13 +14,13 @@ function App() {
   });
   const { username, email } = inputs;
 
-  const onChange = useCallback(
-    e => {
-      const { name, value } = e.target;
-      setInputs({ ...inputs, [name]: value });
-    },
-    [inputs]
-  );
+  const onChange = useCallback(e => {
+    const { name, value } = e.target;
+    setInputs(inputs => ({
+      ...inputs,
+      [name]: value,
+    }));
+  }, []);
 
   const [users, setUsers] = useState([
     {
@@ -45,6 +45,7 @@ function App() {
 
   const nextId = useRef(4);
   const onCreate = useCallback(() => {
+    console.log('create 입니다');
     const user = {
       id: nextId.current,
       username,
@@ -52,29 +53,25 @@ function App() {
       active: false,
     };
 
-    setUsers(users.concat(user));
+    setUsers(users => users.concat(user));
 
     setInputs({ username: '', email: '' });
     nextId.current += 1;
-  }, [users, username, email]);
+  }, [username, email]);
 
-  const onRemove = useCallback(
-    id => {
-      setUsers(users.filter(user => user.id !== id));
-    },
-    [users]
-  );
+  const onRemove = useCallback(id => {
+    console.log('remove 입니다');
+    setUsers(users => users.filter(user => user.id !== id));
+  }, []);
 
-  const onToggle = useCallback(
-    id => {
-      setUsers(
-        users.map(user =>
-          user.id === id ? { ...user, active: !user.active } : user
-        )
-      );
-    },
-    [users]
-  );
+  const onToggle = useCallback(id => {
+    console.log('toggle 입니다');
+    setUsers(users =>
+      users.map(user =>
+        user.id === id ? { ...user, active: !user.active } : user
+      )
+    );
+  }, []);
 
   const count = useMemo(() => countActiveUsers(users), [users]);
 
