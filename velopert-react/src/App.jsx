@@ -1,6 +1,11 @@
-import React, { useRef, useState } from 'react';
-import CreateUser from './Components/16/CreateUser';
-import UserList from './Components/16/UserList';
+import React, { useMemo, useRef, useState } from 'react';
+import CreateUser from './Components/17/CreateUser';
+import UserList from './Components/17/UserList';
+
+function countActiveUsers(users) {
+  console.log('활성 사용자 수를 세는 중...');
+  return users.filter(user => user.active).length;
+}
 
 function App() {
   const [inputs, setInputs] = useState({
@@ -62,6 +67,8 @@ function App() {
     );
   };
 
+  const count = useMemo(() => countActiveUsers(users), [users]);
+
   return (
     <>
       <CreateUser
@@ -71,6 +78,8 @@ function App() {
         onCreate={onCreate}
       />
       <UserList users={users} onRemove={onRemove} onToggle={onToggle} />
+      <br />
+      <div>활성사용자 수: {count}</div>
     </>
   );
 }
