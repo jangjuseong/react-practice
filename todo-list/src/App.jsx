@@ -1,76 +1,63 @@
-import styled from '@emotion/styled';
 import { useState } from 'react';
-
-const Input = styled.div`
-  display: flex;
-`;
-
-const ToDoList = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
 
 function App() {
   const [inputValue, setInputValue] = useState('');
   const [toDoList, setToDoList] = useState([]);
-  const [updateInputValue, setUpdateInputValue] = useState('');
-  const [updateMode, setUpdateMode] = useState(-1);
+  const [isUpdateMode, setIsUpdateMode] = useState(-1);
+  const [newToDo, setNewToDo] = useState('');
 
   const handleSubmit = () => {
+    if (inputValue === '') return;
     setToDoList([...toDoList, inputValue]);
     setInputValue('');
   };
 
   const handleDelete = idx => {
-    setToDoList(toDoList.filter((_, index) => idx !== index));
+    setToDoList(toDoList.filter((_, index) => index !== idx));
   };
 
   const handleUpdateMode = idx => {
-    setUpdateMode(idx);
-    setUpdateInputValue(toDoList[idx]);
+    setIsUpdateMode(idx);
+    setNewToDo(toDoList[idx]);
   };
 
   const handleUpdateComplete = idx => {
     setToDoList(prevList => {
       const updatedList = [...prevList];
-      updatedList[idx] = updateInputValue;
+      updatedList[idx] = newToDo;
       return updatedList;
     });
-    setUpdateMode(-1);
+    setIsUpdateMode(-1);
   };
 
   return (
     <div>
-      <Input>
-        <input
-          value={inputValue}
-          onChange={event => setInputValue(event.target.value)}
-        />
-        <button onClick={handleSubmit}>추가</button>
-      </Input>
-      <ToDoList>
-        {toDoList.map((item, index) => (
-          <div key={index}>
-            {updateMode === index ? (
-              <>
-                <input
-                  value={updateInputValue}
-                  onChange={event => setUpdateInputValue(event.target.value)}
-                />
-                <button onClick={() => handleUpdateComplete(index)}>
-                  수정완료
-                </button>
-              </>
-            ) : (
-              <>
-                <span>{item}</span>
-                <button onClick={() => handleUpdateMode(index)}>수정</button>
-              </>
-            )}
-            <button onClick={() => handleDelete(index)}>삭제</button>
-          </div>
-        ))}
-      </ToDoList>
+      <input
+        value={inputValue}
+        onChange={event => setInputValue(event.target.value)}
+      />
+      <button onClick={handleSubmit}>추가</button>
+      {toDoList.map((item, index) => (
+        <div key={index}>
+          {isUpdateMode === index ? (
+            <>
+              <input
+                value={newToDo}
+                onChange={event => setNewToDo(event.target.value)}
+              />
+              <button onClick={() => handleUpdateComplete(index)}>
+                수정 완료
+              </button>
+            </>
+          ) : (
+            <>
+              <span>{item}</span>
+              <button onClick={() => handleUpdateMode(index)}>수정</button>
+            </>
+          )}
+          <button onClick={() => handleDelete(index)}>삭제</button>
+        </div>
+      ))}
     </div>
   );
 }
